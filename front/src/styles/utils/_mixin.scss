@@ -3,3 +3,9 @@
         @content;
     }
 }
+
+@mixin breakpoint-720px {
+    @media screen and (min-width: 720px) {
+        @content;
+    }
+}
