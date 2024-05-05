@@ -1,4 +1,8 @@
+@import './utils/mixin';
+
 @import './base/base';
 
 @import './components/header';
 @import './components/footer';
+@import './components/hero';
+@import './components/features';
