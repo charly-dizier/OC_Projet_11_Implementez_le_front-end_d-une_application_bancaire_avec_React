@@ -1,4 +1,5 @@
 import Account from "../../components/Account";
+import accountData from "../../utils/data/accountData.json";
 
 function Profile() {
     return (
@@ -10,7 +11,15 @@ function Profile() {
                 </h1>
                 <button className="edit-button">Edit Name</button>
             </div>
-            <Account />
+            <h2 class="sr-only">Accounts</h2>
+            {accountData.map((data) => (
+                <Account 
+                    key={data.id}
+                    title={data.title}
+                    amount={data.amount}
+                    description={data.description}
+                />
+            ))}
         </main>
     )
 }
