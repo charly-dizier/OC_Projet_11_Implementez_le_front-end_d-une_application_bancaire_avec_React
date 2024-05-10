@@ -2,6 +2,7 @@ import { useState } from "react";
 import { isValidEmail, isValidPassword } from "../../utils/isValidForm";
 import { useDispatch } from "react-redux";
 import { loginFail, loginSuccess } from "../../redux/actions/auth.action";
+import { useNavigate } from "react-router-dom";
 
 function FormAuth() {
     const [email, setEmail] = useState('');
@@ -9,6 +10,7 @@ function FormAuth() {
     const [rememberMe, setRememberMe] = useState(false);
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -42,7 +44,6 @@ function FormAuth() {
                 const data = await response.json();
                 //vérification data 
                 console.log(data)
-
                 const token = data.body.token;
                 dispatch(loginSuccess(token));
                 sessionStorage.setItem("token", token)
@@ -53,6 +54,7 @@ function FormAuth() {
                     // vérification du storage
                     console.log(localStorage)
                 }
+                navigate('/profile');
             } else {
                 const error = "Identification incorrect"
                 dispatch(loginFail(error));
