@@ -4,11 +4,15 @@ import User from "../../components/User";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { userProfile } from "../../redux/actions/user.action";
+import { useNavigate } from "react-router-dom";
 
 function Profile() {
 
     const token = useSelector((state) => state.auth.token);
     const dispatch = useDispatch();
+
+    const isConnected = useSelector((state) => state.auth.isConnected);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (token) {
@@ -43,6 +47,12 @@ function Profile() {
             userData();
         }
     }, [dispatch, token]);
+
+    useEffect(() => {
+        if (!isConnected) {
+            navigate("/login");
+        }
+    }, [isConnected, token, navigate])
 
     return (
         <main className="main bg-dark">

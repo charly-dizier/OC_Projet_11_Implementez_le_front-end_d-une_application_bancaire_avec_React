@@ -46,9 +46,11 @@ function FormAuth() {
                 console.log(data)
                 const token = data.body.token;
                 dispatch(loginSuccess(token));
-                sessionStorage.setItem("token", token)
-                //vérification du storage
-                console.log(sessionStorage)
+                if (!rememberMe) {
+                    sessionStorage.setItem("token", token)
+                    //vérification du storage
+                    console.log(sessionStorage)
+                }
                 if (rememberMe) {
                     localStorage.setItem("token", token);
                     // vérification du storage

@@ -105,13 +105,15 @@ paths:
   # swagger phase 2
   # ****************
   /user/account:
-    post: 
+    get: 
       tags:
         - Accounts and Transactions Module
       summary: All accounts
       description: API for retrieving all user account
       security:
         - Bearer: []
+      produces:
+        - application/json      
       responses: 
         '200':
           description: All accounts retrieved successfully
@@ -120,23 +122,25 @@ paths:
             items:
               $ref: '#/definitions/AccountResponse'
         '401':
-          description: Unauthorized user
+          description: Unauthorized
         '500':
           description: Internal Server Error
-  /user/account/{accountID}/transaction:
-    post:
+  /account/{accountID}/transaction:
+    get:
       security:
         - Bearer: []
       tags:
         - Accounts and Transactions Module
       summary: Account transaction
-      description: API for retrieving all transaction associted to an account ID
+      description: API for retrieving all transactions associated with an account ID
       parameters:
         - in: path
           name: accountID
           description: ID of the account
           required: true
           type: string
+      produces:
+        - application/json          
       responses:
         '200':
           description: All transaction retrieved successfully
@@ -149,9 +153,9 @@ paths:
         '404':
           description: Account not found
         '500':
-          description: Internal Serveur Error
-  /user/account/{accountID}/transaction/{transactionID}/category:
-    put:
+          description: Internal Server Error
+  /transaction/{transactionID}/category:
+    patch:
       tags:
         - Accounts and Transactions Module
       summary: Update transaction's category
@@ -159,11 +163,6 @@ paths:
       security:
         - Bearer: []
       parameters:
-        - in: path
-          name: accountID
-          description: ID of the account
-          required: true
-          type: string
         - in: path
           name: transactionID
           description: ID of a transaction
@@ -175,6 +174,8 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/TransactionCategory'
+      produces:
+        - application/json            
       responses:
         '200':
           description: Transaction's category successfully modified
@@ -186,7 +187,7 @@ paths:
           description: Transaction not found
         '500':
           description: Internal Server Error
-  /user/account/{accountID}/transaction/{transactionID}/note:
+  /transaction/{transactionID}/note:
     post:
       tags:
         - Accounts and Transactions Module
@@ -195,11 +196,6 @@ paths:
       security:
         - Bearer: []
       parameters:
-        - in: path
-          name: accountID
-          description: ID of the account
-          required: true
-          type: string
         - in: path
           name: transactionID
           description: ID of a transaction
@@ -211,6 +207,8 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/TransactionNote'
+      produces:
+        - application/json            
       responses:
         '200':
           description: Note added successfully to the transaction 
@@ -222,7 +220,7 @@ paths:
           description: Not found
         '500':
           description: Internal Server Error
-  /user/account/{accountID}/transactions/{transactionID}/note/{noteID}:
+  /transactions/{transactionID}/note/{noteID}:
     put:
       tags:
         - Accounts and Transactions Module
@@ -231,11 +229,6 @@ paths:
       security: 
         - Bearer: []
       parameters:
-        - in: path
-          name: accountID
-          description: ID of the account
-          required: true
-          type: string
         - in: path
           name: transactionID
           description: ID of a transaction
@@ -252,6 +245,8 @@ paths:
           required: true
           schema: 
             $ref: '#/definitions/TransactionNote'
+      produces:
+        - application/json            
       responses:
         '200':
           description: Note modified successfully
@@ -272,11 +267,6 @@ paths:
         - Bearer: []
       parameters:
         - in: path
-          name: accountID
-          description: ID of the account
-          required: true
-          type: string
-        - in: path
           name: transactionID
           description: ID of a transaction
           required: true
@@ -286,6 +276,8 @@ paths:
           description: ID of a note
           required: true
           type: string
+      produces:
+        - application/json          
       responses:
         '200':
           description: Note deleted successfully
@@ -385,7 +377,7 @@ definitions:
       description:
         type: string
         description: description of transaction
-      amout:
+      amount:
         type: number
         description: transaction amount
       balance:
@@ -394,7 +386,13 @@ definitions:
         format: double
       category:
         type: string
-        description: name of the category
+        enum:
+          - Food
+          - Transport
+          - Utilities
+          - Entertainment
+          - Other
+        description: The category of the transaction, must be one of the predefined values
       note:
         type: string
         description: user note
@@ -403,6 +401,13 @@ definitions:
     properties:
       category:
         type: string
+        enum:
+          - Food
+          - Transport
+          - Utilities
+          - Entertainement
+          - Other
+        description: The category of the transaction, must be one of the predefined values
   TransactionNote:
     type: object
     properties: 

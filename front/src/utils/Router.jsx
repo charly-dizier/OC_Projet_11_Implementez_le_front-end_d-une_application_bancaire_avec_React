@@ -1,6 +1,7 @@
-import React from "react";
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "../redux/actions/auth.action";
 
 //Composant importer
 import Header from "../components/Header";
@@ -15,7 +16,15 @@ import Profile from "../pages/Profile";
 import '../styles/main.scss';
 
 function Router() {
-    const isLogged = useSelector((state) => state.auth.isConnected)
+    
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        const token = sessionStorage.getItem('token') || localStorage.getItem('token');
+        if (token) {
+            dispatch(loginSuccess(token));
+        }
+    }, [dispatch]);
     
     return (
         <React.StrictMode>
@@ -24,7 +33,7 @@ function Router() {
                 <Routes>
                     <Route exact path="/" element={<Home />} />
                     <Route exact path="/login" element={<Login />} />
-                    <Route exact path="/profile" element={isLogged ? <Profile /> : <Navigate to="/login" />} />
+                    <Route exact path="/profile" element={<Profile />} />
                 </Routes>
                 <Footer />
             </BrowserRouter>
