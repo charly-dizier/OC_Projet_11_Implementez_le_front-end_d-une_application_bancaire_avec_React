@@ -11,6 +11,7 @@ import Footer from "../components/Footer";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Profile from "../pages/Profile";
+import PageNotFound from "../pages/PageNotFound";
 
 //Style
 import '../styles/main.scss';
@@ -34,6 +35,7 @@ function Router() {
                     <Route exact path="/" element={<Home />} />
                     <Route exact path="/login" element={<Login />} />
                     <Route exact path="/profile" element={<Profile />} />
+                    <Route exact path="*" element={<PageNotFound />} />
                 </Routes>
                 <Footer />
             </BrowserRouter>

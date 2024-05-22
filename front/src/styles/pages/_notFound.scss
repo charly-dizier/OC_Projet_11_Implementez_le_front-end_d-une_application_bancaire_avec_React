@@ -1,0 +1,21 @@
+.notFound {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: auto;
+    &_txt {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #2c3e50;
+    }
+    &_link {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: white;
+        text-decoration: none;
+        background-color: #00bc77;
+        border-radius: 20px;
+        width: 320px;
+    }
+}
