@@ -2,9 +2,9 @@ import Hero from "../../components/Hero";
 import Features from "../../components/Features";
 import featuresData from "../../utils/data/featuresData";
 
-import iconChat from "../../assets/icons/icon-chat.png";
-import iconMoney from "../../assets/icons/icon-money.png";
-import iconSecurity from "../../assets/icons/icon-security.png";
+import iconChat from "../../assets/icons/icon-chat.webp";
+import iconMoney from "../../assets/icons/icon-money.webp";
+import iconSecurity from "../../assets/icons/icon-security.webp";
 
 function Home() {
 

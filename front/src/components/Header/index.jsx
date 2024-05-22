@@ -1,10 +1,10 @@
 import { NavLink, Link, useNavigate } from 'react-router-dom'
-import logo from '../../assets/images/argentBankLogo.png'
+import logo from '../../assets/images/argentBankLogo.webp'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../../redux/actions/auth.action';
 
 function Header() {
-    const isConnected = useSelector((state) => state.auth.token);
+    const isConnected = useSelector((state) => state.auth.isConnected);
     const username = useSelector((state) => state.user.userData.username);
 
     const dispatch = useDispatch();
