@@ -1,18 +1,25 @@
+// Importation React 
 import { useEffect } from "react";
-import FormAuth from "../../components/FormAuth";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+
+// Importation Redux
+import { useSelector } from "react-redux";
+
+// Importation des composants
+import FormAuth from "../../components/FormAuth";
 
 function Login() {
 
-    const isConnected = useSelector((state) => state.auth.isConnected)
-    const navigate = useNavigate();
+    // Création des Hook
+    const navigate = useNavigate(); // Pour gérer la navigation dans React Router
+    const isConnected = useSelector((state) => state.auth.isConnected) // Récupération de l'état de connexion depuis le store Redux
 
+    // Effect de bord pour rediriger vers la page de profil si l'utilisateur est déjà connecté
     useEffect(() => {
         if (isConnected) {
-            navigate("/profile");
+            navigate("/profile"); // Redirection vers la page de profil
         }
-    }, [isConnected, navigate,])
+    }, [isConnected, navigate])
 
     return (
         <main className="main bg-dark">

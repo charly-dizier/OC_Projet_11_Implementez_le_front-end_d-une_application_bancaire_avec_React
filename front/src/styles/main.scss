@@ -1,7 +1,10 @@
+// Outil
 @import './utils/mixin';
 
+// Base
 @import './base/base';
 
+// Components
 @import './components/header';
 @import './components/footer';
 @import './components/hero';
@@ -9,6 +12,7 @@
 @import './components/formAuth';
 @import './components/account';
 
+//Pages
 @import './pages/login';
 @import './pages/profile';
 @import './pages/notFound';

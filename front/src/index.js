@@ -1,9 +1,9 @@
+// Importation React
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-
 import Router from './utils/Router';
 
-//Redux
+// Importation Redux
 import { Provider } from "react-redux";
 import store from './redux/store';
 

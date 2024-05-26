@@ -1,27 +1,39 @@
+// Importation React
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux"
-import { isValideName } from "../../utils/isValidForm";
+
+// Importation Redux
+import { useDispatch, useSelector } from "react-redux";
 import { updateUsername } from "../../redux/actions/user.action";
 
+// Importation utilitaire
+import { isValideName } from "../../utils/isValidForm";
 
 function User() {
-    const [display, setDisplay] = useState(true);
-    const [userName, setUserName] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
+    // Initialisation des States
+    const [display, setDisplay] = useState(true); // Gère l'affichage du formulaire d'édition du userName
+    const [userName, setUserName] = useState(''); // Stock le userName entré par l'utilisateur
+    const [errorMessage, setErrorMessage] = useState(''); // Stock les messages d'erreur
     
-    const dispatch = useDispatch();
-    const token = useSelector((state) => state.auth.token);
-    const userData = useSelector((state) => state.user.userData);
+    // Création des Hooks
+    const dispatch = useDispatch(); // Pour envoyer des actions Redux
+
+    // Sélection des données de l'état global Redux à l'aide du hook useSelector
+    const token = useSelector((state) => state.auth.token); // Récupère le token d'authentification
+    const userData = useSelector((state) => state.user.userData); // Récupère les données de l'utilisateur
     
+    // Fonction de soumission des modifications du userName
     const submitChangeUsername = async (event) => {
         event.preventDefault();
+        // Vérification de la validité du nom
         if (!isValideName(userName)) {
             setErrorMessage("Invalid username");
             return
         } else {
             setErrorMessage("");
         }
+
         try {
+            // Appel à l'API pour mettre à jour le userName
             const response = await fetch('http://localhost:3001/api/v1/user/profile', {
                 method: 'PUT',
                 headers: {
@@ -30,13 +42,17 @@ function User() {
                 },
                 body: JSON.stringify({userName}),
             });
-            if (response.ok) {
+            if (response.status === 200) {
                 const data = await response.json();
                 const username = data.body.userName;
 
+                // Dispatch de l'action updateUsername pour mettre a jour le userName dans le store Redux
                 dispatch(updateUsername(username));
+
+                // Inversion de l'affichage du formulaire d'édition
                 setDisplay(!display);
             }
+        // Gestion des erreurs
         } catch (error) {
             console.error(error);
         }

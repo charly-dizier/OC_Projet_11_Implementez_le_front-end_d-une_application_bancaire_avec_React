@@ -1,6 +1,8 @@
-import img from '../../assets/images/not-found.webp'
+// Importation React
 import { Link } from 'react-router-dom'
 
+// Importation des assetes
+import img from '../../assets/images/not-found.webp'
 
 function PageNotFound() {
     return (
