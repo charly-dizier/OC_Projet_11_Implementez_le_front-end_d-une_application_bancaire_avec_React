@@ -101,9 +101,9 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
-  # ****************
-  # swagger phase 2
-  # ****************
+  # ************************
+  # swagger phase 2 : Path
+  # ************************
   /user/account:
     get: 
       tags:
@@ -342,9 +342,9 @@ definitions:
     properties:
       userName:
         type: string
-  # ****************
-  # swagger phase 2
-  # ****************
+  # ******************************
+  # swagger phase 2 : Definitions
+  # ******************************
   AccountResponse:
     type: object
     properties:
